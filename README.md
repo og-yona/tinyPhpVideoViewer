@@ -16,6 +16,7 @@ Nice and simple way to share your videos/clips with your friends ("semi-")privat
 
 ## Features
 - Responsive page/layout - No page reloads
+  - Flashing "Loading.." -indicator when changing/pre-loading a new video
 - 2 Dark themes and 2 light themes to select from
 - Fetches a list of video-files from a specified *('./videos/' by default )* subfolder
   - Url-parameterize the selected files
