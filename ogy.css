@@ -1,0 +1,455 @@
+/*==================================*/
+/*  Layout & Styles configurations  */
+/*  for    tinyPhpVideoViewer       */
+/*==================================*/
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	height: 100vh;
+	overflow: hidden;
+	font-family: Consolas, "Courier New", monospace;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+/*==================================*/
+/* The video panel & player configs */
+
+.video-panel {
+	flex: 0 0 74%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	transition: flex 0.1s ease;
+}
+
+.video-panel video {
+	width: 90%;
+	height: auto;
+	border-radius: 5px;
+}
+
+.video-title {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.loading-indicator {
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	transform: translate(-50%, -50%);
+	background-color: rgba(0, 0, 0, 0.8);
+	padding: 20px;
+	border-radius: 8px;
+	/* color: #00ff00; */
+	font-size: 24px;
+	font-weight: bold;
+	display: none;
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.5; }
+}
+
+.controls {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+
+.controls input {
+	margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid;
+}
+
+.controls button {
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/*===========================================*/
+/* Settings & Filters & File Selection panel */
+
+.list-panel {
+	flex: 0 0 26%;
+	min-width: 150px;
+	padding: 0px; /* move padding to separate areas 20px; */  /* def:20 */
+	overflow-y: auto; /* Enable vertical scrolling */
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	transition: flex 0.1s ease;
+	max-height: 100%; /* Prevents the panel from growing beyond the viewport */
+	/* border: 2px solid red; */
+	box-sizing: border-box; /* Includes padding in the height */
+}
+
+.list-panel .theme-selector {
+	padding: 20px 20px; /* Add padding to the top part */
+	background-color: inherit; /* Match the panel's background color */
+	z-index: 10; /* Ensure it's above the scrollable list */
+}
+.list-panel .controls,
+.list-panel h2 {
+	padding: 1px 20px; /* Add padding to the top part */
+	background-color: inherit; /* Match the panel's background color */
+	z-index: 10; /* Ensure it's above the scrollable list */
+}
+
+.list-panel ul {
+	list-style-type: none;
+	padding: 1px 20px; /* Padding inside the scrollable area */
+	margin: 0;
+	overflow-y: auto; /* Enable scrolling for the list only */
+	flex-grow: 1; /* Ensure it takes up remaining space in the panel */
+}
+
+.list-panel::-webkit-scrollbar {
+	width: 8px; /* Width of the scrollbar */
+}
+
+.list-panel::-webkit-scrollbar-thumb {
+	background: #00ff00; /* Color of the scrollbar thumb */
+	border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+}
+
+.list-panel::-webkit-scrollbar-thumb:hover {
+	background: #00cc00; /* Darker color on hover */
+}
+
+.list-panel::-webkit-scrollbar-track {
+	background: #001a00; /* Background color of the scrollbar track */
+}
+
+/*=============================================================================*/
+/* Resizer in between the video & list - allows changing ratio between the two */
+
+.resizer {
+	flex: 0 0 0.3%;
+	min-width: 1px;
+	display: flex;
+	/* background-color: #00ff00; */
+	cursor: col-resize;
+	position: relative; /* absolute */
+	flex-direction: column;
+	transition: flex 0.1s ease;
+	top: 0;
+	bottom: 0;
+	/* left: calc(78% - 2.5px); */ /* Center the resizer on the boundary */
+	/* border: 2px solid red; */
+	/* max-height: 100%;  Prevents the panel from growing beyond the viewport */
+}
+
+/*==========================================*/
+/* Theme / style selector buttons & configs */
+
+.theme-selector {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.theme-button {
+	width: 30px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	border: 1px solid #666;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.theme-button.D-Matrix {
+	background-color: #000;
+	color: #00ff00;
+}
+
+.theme-button.D-Orange {
+	background-color: #222;
+	color: #ff8800;
+}
+
+.theme-button.L-Light1 {
+	background-color: #fff;
+	color: #000;
+}
+
+.theme-button.L-Light2 {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+/*===========================*/
+/*   basic html elements     */
+
+button {
+	padding: 2px;
+	border: none;
+	border-radius: 1px;
+	cursor: pointer;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	margin: 10px 0;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid;
+	cursor: pointer;
+}
+
+li:hover {
+	opacity: 0.8;
+}
+
+li.active {
+	font-weight: bold;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/*===========================*/
+/*    Themes                 */
+
+/*===========================*/
+/* Matrix - Dark neon green  */
+body.theme-Matrix {
+	background-color: #000;
+	color: #00ff00;
+}
+
+.theme-Matrix .video-panel video {
+	border: 2px solid #00ff00;
+}
+
+.theme-Matrix .video-title {
+	color: #00cc00;
+}
+
+.theme-Matrix .controls input {
+	background-color: #001a00;
+	color: #00ff00;
+	border-color: #003300;
+}
+
+.theme-Matrix .controls button {
+	background-color: #00ff00;
+	color: #000;
+}
+
+.theme-Matrix button {
+	background-color: #00ff00;
+	color: #000;
+}
+
+.theme-Matrix li {
+	background-color: #002200;
+	border-color: #003300;
+}
+
+.theme-Matrix li.active {
+	/* opacity: 0.7; */
+	background-color: #003300;
+}
+
+.theme-Matrix a {
+	color: #00cc00;
+}
+
+.theme-Matrix .resizer {
+	background-color: #00ff00;
+}
+
+.theme-Matrix .loading-indicator {
+	color: #00ff00;
+}		
+
+/*============================*/
+/* Orange - Dark orange theme */
+
+body.theme-Orange {
+	background-color: #222;
+	color: #ff8800;
+}
+
+.theme-Orange .video-panel video {
+	border: 2px solid #ff8800;
+}
+
+.theme-Orange .video-title {
+	color: #ffaa00;
+}
+
+.theme-Orange .controls input {
+	background-color: #332211;
+	color: #ff8800;
+	border-color: #664422;
+}
+
+.theme-Orange .controls button {
+	background-color: #ff8800;
+	color: #000;
+}
+
+.theme-Orange button {
+	background-color: #ff8800;
+	color: #000;
+}
+
+.theme-Orange li {
+	background-color: #442200;
+	border-color: #664422;
+}
+
+.theme-Orange li.active {
+	/* opacity: 0.7; */
+	background-color: #664422;
+}
+
+.theme-Orange a {
+	color: #ffaa00;
+}
+
+.theme-Orange .resizer {
+	background-color: #ffaa00;
+}
+
+.theme-Orange .loading-indicator {
+	color: #ffaa00;
+}		
+
+/*=======================*/
+/* Light1 - light theme  */
+
+body.theme-Light1 {
+	background-color: #fff;
+	color: #000;
+}
+
+.theme-Light1 .video-panel video {
+	border: 2px solid #000;
+}
+
+.theme-Light1 .video-title {
+	color: #333;
+}
+
+.theme-Light1 .controls input {
+	background-color: #f8f8f8;
+	color: #000;
+	border-color: #ccc;
+}
+
+.theme-Light1 .controls button {
+	background-color: #ccc;
+	color: #000;
+}
+
+.theme-Light1 button {
+	background-color: #ccc;
+	color: #000;
+}
+
+.theme-Light1 li {
+	background-color: #f9f9f9;
+	border-color: #ddd;
+}
+
+.theme-Light1 li.active {
+	/* opacity: 0.7; */
+	background-color: #ddd;
+}
+
+.theme-Light1 a {
+	color: #333;
+}
+
+.theme-Light1 .resizer {
+	background-color: #333;
+}
+
+.theme-Light1 .loading-indicator {
+	color: #333;
+}	
+
+/*=======================*/
+/* Light2 - light theme  */
+
+body.theme-Light2 {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+.theme-Light2 .video-panel video {
+	border: 2px solid #666;
+}
+
+.theme-Light2 .video-title {
+	color: #444;
+}
+
+.theme-Light2 .controls input {
+	background-color: #fff;
+	color: #333;
+	border-color: #bbb;
+}
+
+.theme-Light2 .controls button {
+	background-color: #bbb;
+	color: #333;
+}
+
+.theme-Light2 button {
+	background-color: #bbb;
+	color: #333;
+}
+
+.theme-Light2 li {
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+.theme-Light2 li.active {
+	/* opacity: 0.7; */
+	background-color: #ccc;
+}
+
+.theme-Light2 a {
+	color: #444;
+}
+
+.theme-Light2 .resizer {
+	background-color: #444;
+}
+
+.theme-Light2 .loading-indicator {
+	color: #444;
+}	
