@@ -18,11 +18,11 @@ Nice and simple way to share your videos/clips with your friends ("semi-")privat
 - Responsive page/layout - No page reloads
 - 2 Dark themes and 2 light themes to select from
 - Fetches a list of video-files from a specified *('./videos/' by default )* subfolder
--- Url-parameter file-selections
--- Looks the folder for both *.mp4* and *.bin* files - as for some reason some servers/browsers need renaming the .mp4's as .bins to make playing work - dont ask me why.
--- Show basic details about the files : filesize, modified date and duration (the php server needs to have ffprobe to be able to get the durations)
+  - Url-parameterize the selected files
+  - Looks the folder for both *.mp4* and *.bin* files - as for some reason some servers/browsers need renaming the .mp4's as .bins to make playing work - dont ask me why.
+  - Show basic details about the files : filesize, modified date and duration (the php server needs to have ffprobe to be able to get the durations)
 - Sort files by modified date on server 
--- Order reversible
+  - Order reversible
 - Filter videos by their filenames - filtering is case-insensitive and treated as substring
 - Copy direct URL's to specific videos to share a video link to your friends
 - Auto-select the correct video from URL-parameter when loading a page (from a shared link)
